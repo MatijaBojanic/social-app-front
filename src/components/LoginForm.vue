@@ -47,6 +47,7 @@ export default {
         // Fetch initial data after successful login
         await this.initializeApp();
 
+        this.$router.push('/dashboard');  // Redirect to the dashboard
       } catch (error) {
         // Handle login error
         console.error('Login failed:', error.response?.data.message);
