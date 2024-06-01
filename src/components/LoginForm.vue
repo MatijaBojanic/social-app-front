@@ -28,8 +28,7 @@ export default {
   methods: {
     async login() {
       try {
-        const data = await login(this.email, this.password);
-        localStorage.setItem('token', data.token);  // Assuming token is returned here
+        await login(this.email, this.password);
         await this.initializeApp();
         this.$router.push('/dashboard');
       } catch (error) {

@@ -23,10 +23,16 @@ async function login(email, password) {
     return response.data;  // return the whole response data object
 }
 
+async function logout() {
+    await initializeCsrf();  // Ensure CSRF token is set before login
+    const response = await axiosInstance.get('/logout');
+    return response.data;  // return the whole response data object
+}
+
 // Function to initialize app data
 async function initializeApp() {
     const response = await axiosInstance.get('/initialize');
     return response.data;
 }
 
-export { login, initializeApp };
+export { login, initializeApp, logout};

@@ -17,15 +17,17 @@
 </template>
 
 <script>
+import {logout as logoutCall} from "@/components/axiosService";
+
 export default {
   name: 'DashboardPage',
   methods: {
-    logout() {
-      // Perform logout logic, e.g., clearing token, redirecting
-      localStorage.removeItem('token');
-      this.$router.replace('/login'); // Redirect to login after logout
+    async logout() {
+      await logoutCall();
+      this.$router.replace('/login');
     }
   }
+
 };
 </script>
 
