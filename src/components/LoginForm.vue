@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { login, initializeApp } from './axiosService';
+import {initializeApp, login} from './axiosService';
 
 export default {
   data() {
@@ -37,8 +37,7 @@ export default {
     },
     async initializeApp() {
       try {
-        const initData = await initializeApp();
-        console.log('Initialization data:', initData);
+        this.$root.user = await initializeApp();
       } catch (error) {
         console.error('Initialization failed:', error.message);
       }

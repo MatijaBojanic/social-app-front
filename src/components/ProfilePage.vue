@@ -3,7 +3,9 @@
     <header class="profile-box">
       <div class="profile-header">
         <h1>{{ user?.username }}</h1>
-      <button @click="toggleFollow" class="follow-button">{{ isFollowing ? 'Unfollow' : 'Follow' }}</button>
+        <button v-if="$root.user.id !== this.user.id" @click="toggleFollow" class="follow-button">
+          {{ isFollowing ? 'Unfollow' : 'Follow' }}
+        </button>
       </div>
       <hr class="section-separator">
     </header>

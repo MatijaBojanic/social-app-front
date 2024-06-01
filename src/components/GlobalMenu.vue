@@ -3,7 +3,7 @@
     <nav class="dashboard-menu">
       <ul>
         <li><router-link to="/dashboard">Home</router-link></li>
-        <li><router-link to="/profile">Profile</router-link></li>
+        <li><router-link :to="`/user/${$root.user.id}`">Profile</router-link></li>
       </ul>
       <button @click="logout" class="logout-button">Logout</button>
     </nav>
