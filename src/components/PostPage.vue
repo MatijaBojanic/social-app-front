@@ -10,7 +10,7 @@
     <hr class="section-separator">
     <h2>Comments</h2>
     <form @submit.prevent="submitComment" class="comment-form">
-      <textarea v-model="newComment" placeholder="Write a comment..." required class="comment-textarea"></textarea>
+      <textarea v-model="newComment" placeholder="Join the conversation..." required class="comment-textarea"></textarea>
       <button type="submit" class="comment-button">Post Comment</button>
     </form>
     <!-- Comments Section -->
