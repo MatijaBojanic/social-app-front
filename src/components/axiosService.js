@@ -44,4 +44,9 @@ async function posts(page) {
     return response.data;
 }
 
-export { login, initializeApp, logout, posts};
+async function post(postId) {
+    const response = await axiosInstance.get('/posts/' + postId);
+    return response.data;
+}
+
+export { login, initializeApp, logout, posts, post};

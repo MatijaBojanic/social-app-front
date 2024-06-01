@@ -15,7 +15,7 @@
       <div v-if="posts.length">
         <div class="post" v-for="post in posts" :key="post.id">
           <!-- Make the post title clickable -->
-          <h3><router-link :to="{ name: 'postDetail', params: { id: post.id }}">{{ post.title }}</router-link></h3>
+          <h3><router-link :to="{ name: 'PostPage', params: { id: post.id }}">{{ post.title }}</router-link></h3>
           <p>{{ post.body }}</p>
           <small>Posted by: {{ post.user.username }} on {{ new Date(post.created_at).toLocaleDateString() }}</small>
         </div>
@@ -145,6 +145,17 @@ body, html {
   margin-bottom: 10px;
   border-radius: 5px;
 }
+
+.post h3 a {
+  color: #ffffff; /* White color for better visibility */
+  text-decoration: none; /* Removes underline */
+}
+
+.post h3 a:hover {
+  color: #cccccc; /* Light grey for hover effect */
+  text-decoration: underline; /* Optional: Adds an underline on hover to highlight the link */
+}
+
 .pagination {
   display: flex;
   justify-content: center;
