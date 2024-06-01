@@ -49,4 +49,11 @@ async function post(postId) {
     return response.data;
 }
 
-export { login, initializeApp, logout, posts, post};
+async function createComment(postId, commentBody) {
+    const response = await axiosInstance.post('/posts/' + postId + '/comments', {
+        'body': commentBody
+    });
+    return response.data;
+}
+
+export { login, initializeApp, logout, posts, post, createComment};
