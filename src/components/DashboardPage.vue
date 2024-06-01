@@ -1,7 +1,8 @@
 <template>
   <div class="dashboard-container">
     <main class="dashboard-content">
-      <h1>This is the Dashboard</h1>
+      <h1>See what is happening</h1>
+        <button @click="createPost" class="create-post-button">Create New Post</button>
       <div v-if="posts.length">
         <div class="post" v-for="post in posts" :key="post.id">
           <!-- Make the post title clickable -->
@@ -57,6 +58,10 @@ export default {
     async logout() {
       await logoutCall();
       this.$router.replace('/login');
+    },
+    createPost() {
+      // Route to the page or modal to create a new post
+      this.$router.push({ name: 'CreatePostPage' });
     }
   }
 };
@@ -162,6 +167,19 @@ body, html {
 .pagination button:disabled {
   opacity: 0.5;
   cursor: default;
+}
+.create-post-button {
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Green background for visibility */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px; /* Space before the post list starts */
+}
+
+.create-post-button:hover {
+  background-color: #45a049; /* Slightly darker green for hover effect */
 }
 </style>
 
