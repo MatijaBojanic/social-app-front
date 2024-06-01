@@ -1,15 +1,5 @@
 <template>
   <div class="dashboard-container">
-    <header class="dashboard-header">
-      <nav class="dashboard-menu">
-        <ul>
-          <li><router-link to="/home">Home</router-link></li>
-          <li><router-link to="/profile">Profile</router-link></li>
-          <li><router-link to="/settings">Settings</router-link></li>
-        </ul>
-        <button @click="logout" class="logout-button">Logout</button>
-      </nav>
-    </header>
     <main class="dashboard-content">
       <h1>This is the Dashboard</h1>
       <div v-if="posts.length">

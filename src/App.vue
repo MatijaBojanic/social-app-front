@@ -1,12 +1,23 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <GlobalMenu v-if="showMenu"/>
+    <router-view/>
   </div>
 </template>
 
 <script>
+import GlobalMenu from './components/GlobalMenu';
+
 export default {
-  name: 'App'
+  components: {
+    GlobalMenu
+  },
+  computed: {
+    // This will check the current route and decide whether to show the menu
+    showMenu() {
+      return this.$route.name !== 'login'; // Assuming the route name for the login page is 'login'
+    }
+  }
 }
 </script>
 
