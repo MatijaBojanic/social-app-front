@@ -61,7 +61,7 @@ export default {
     },
     createPost() {
       // Route to the page or modal to create a new post
-      this.$router.push({ name: 'CreatePostPage' });
+      this.$router.push({ name: 'CreatePost' });
     }
   }
 };
