@@ -2,9 +2,8 @@
   <header v-if="shouldShowMenu" class="dashboard-header">
     <nav class="dashboard-menu">
       <ul>
-        <li><router-link to="/home">Home</router-link></li>
+        <li><router-link to="/dashboard">Home</router-link></li>
         <li><router-link to="/profile">Profile</router-link></li>
-        <li><router-link to="/settings">Settings</router-link></li>
       </ul>
       <button @click="logout" class="logout-button">Logout</button>
     </nav>
