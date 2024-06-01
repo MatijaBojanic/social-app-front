@@ -16,9 +16,7 @@
 </template>
 
 <script>
-import axios from 'axios';
-axios.defaults.withCredentials = true;
-axios.defaults.withXSRFToken = true;
+import { login, initializeApp } from './axiosService';
 
 export default {
   data() {
@@ -30,37 +28,20 @@ export default {
   methods: {
     async login() {
       try {
-        // Request the CSRF cookie from Laravel
-        await axios.get('http://localhost:80/sanctum/csrf-cookie');
-        axios.defaults.withCredentials = true;
-
-        // Proceed to submit login credentials
-        const loginResponse = await axios.post('http://localhost:80/login', {
-          email: this.email,
-          password: this.password
-        });
-
-        // Assuming the backend returns a token upon successful login
-        const token = loginResponse.data.token;
-        localStorage.setItem('token', token);  // Store the token for future requests
-
-        // Fetch initial data after successful login
+        const data = await login(this.email, this.password);
+        localStorage.setItem('token', data.token);  // Assuming token is returned here
         await this.initializeApp();
-
-        this.$router.push('/dashboard');  // Redirect to the dashboard
+        this.$router.push('/dashboard');
       } catch (error) {
-        // Handle login error
-        console.error('Login failed:', error.response?.data.message);
+        console.error('Login failed:', error.message);
       }
     },
     async initializeApp() {
       try {
-        const initResponse = await axios.get('http://localhost:80/initialize');
-        // Handle the response, e.g., storing it in Vuex or component data
-        console.log('Initialization data:', initResponse.data);
+        const initData = await initializeApp();
+        console.log('Initialization data:', initData);
       } catch (error) {
-        // Handle errors from the initialization request
-        console.error('Initialization failed:', error.response?.data.message);
+        console.error('Initialization failed:', error.message);
       }
     }
   }
