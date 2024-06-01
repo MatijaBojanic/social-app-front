@@ -14,9 +14,16 @@
       <h1>This is the Dashboard</h1>
       <div v-if="posts.length">
         <div class="post" v-for="post in posts" :key="post.id">
-          <h3>{{ post.title }}</h3>
+          <!-- Make the post title clickable -->
+          <h3><router-link :to="{ name: 'postDetail', params: { id: post.id }}">{{ post.title }}</router-link></h3>
           <p>{{ post.body }}</p>
-          <small>Posted on: {{ new Date(post.created_at).toLocaleDateString() }}</small>
+          <small>Posted by: {{ post.user.username }} on {{ new Date(post.created_at).toLocaleDateString() }}</small>
+        </div>
+        <!-- Pagination Controls -->
+        <div class="pagination">
+          <button @click="fetchPosts(currentPage - 1)" :disabled="!prevPageUrl">Previous</button>
+          <span>Page {{ currentPage }} of {{ lastPage }}</span>
+          <button @click="fetchPosts(currentPage + 1)" :disabled="!nextPageUrl">Next</button>
         </div>
       </div>
       <div v-else>
@@ -33,17 +40,25 @@ export default {
   name: 'DashboardPage',
   data() {
     return {
-      posts: []
+      posts: [],
+      currentPage: 1,
+      lastPage: 1,
+      nextPageUrl: null,
+      prevPageUrl: null,
     };
   },
   mounted() {
-    this.fetchPosts();
+    this.fetchPosts(this.currentPage);
   },
   methods: {
-  async fetchPosts() {
+    async fetchPosts(page) {
       try {
-        const response = postsCall();
-        this.posts = response.data.data;
+        const response = await postsCall(page);
+        this.posts = response.data;
+        this.currentPage = response.current_page;
+        this.lastPage = response.last_page;
+        this.nextPageUrl = response.next_page_url;
+        this.prevPageUrl = response.prev_page_url;
       } catch (error) {
         console.error('Error fetching posts:', error);
         this.posts = [];
@@ -129,6 +144,23 @@ body, html {
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.pagination button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  background-color: #666;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 </style>
 

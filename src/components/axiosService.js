@@ -35,8 +35,12 @@ async function initializeApp() {
     return response.data;
 }
 
-async function posts() {
-    const response = await axiosInstance.get('/posts');
+async function posts(page) {
+    const response = await axiosInstance.get('/posts', {
+        params: {
+            page: page,
+        },
+    });
     return response.data;
 }
 
