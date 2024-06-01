@@ -35,9 +35,10 @@ async function initializeApp() {
     return response.data;
 }
 
-async function posts(page) {
+async function posts(page, userId) {
     const response = await axiosInstance.get('/posts', {
         params: {
+            user_id: userId,
             page: page,
         },
     });
@@ -64,4 +65,15 @@ async function createPost(title, body) {
     return response.data;
 }
 
-export { login, initializeApp, logout, posts, post, createPost, createComment};
+async function getUserDetails(userId) {
+    const response = await axiosInstance.get('/users/' + userId);
+    return response.data;
+}
+
+async function toggleFollow(userId) {
+    const response = await axiosInstance.post('/users/' + userId + '/follow');
+    return response.data;
+}
+
+
+export { login, initializeApp, logout, posts, post, createPost, createComment, getUserDetails, toggleFollow};

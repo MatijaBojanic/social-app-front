@@ -6,6 +6,7 @@ import Dashboard from '@/components/DashboardPage.vue';  // Adjust path as neede
 import LoginForm from '@/components/LoginForm.vue';  // Adjust path as needed
 import PostPage from '@/components/PostPage.vue';
 import CreatePost from "@/components/CreatePost.vue";  // Adjust path as needed
+import ProfilePage from "@/components/ProfilePage.vue";
 
 // Use Router
 Vue.use(Router);
@@ -18,5 +19,6 @@ export default new Router({
         { path: '/dashboard', name: 'Dashboard', component: Dashboard },
         { path: '/post/:id', name: 'PostPage', component: PostPage},
         {path: '/post/create', name: 'CreatePost', component: CreatePost},
+        {path: '/user/:id', name: 'ProfilePage', component: ProfilePage},
     ]
 });
