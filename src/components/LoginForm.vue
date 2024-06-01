@@ -51,17 +51,25 @@ export default {
 
 
 <style scoped>
+* {
+  box-sizing: border-box; /* Ensures all elements consider padding and border in their width and height */
+}
+
 .login-container {
   max-width: 400px;
   margin: 0 auto;
+  margin-top: 50px; /* Add top margin to move down the form */
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #444; /* Darker border */
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #333; /* Dark background */
+  color: #fff; /* Light text color for readability */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Optional: Adds depth with a shadow */
 }
 
 h2 {
   margin-top: 0;
+  color: #fff; /* Ensuring heading is visible */
 }
 
 .login-form {
@@ -75,29 +83,40 @@ h2 {
 
 label {
   font-weight: bold;
-}
-
-input[type="email"],
-input[type="password"],
-button {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  color: #ccc; /* Lighter label color for contrast */
 }
 
 input[type="email"],
 input[type="password"] {
-  width: 100%;
+  width: 100%; /* Adjust back to 100% width */
+  margin: 0; /* Remove margin if no longer necessary */
+  padding: 10px;
+  font-size: 16px;
+  background-color: #555; /* Darker input fields */
+  color: #fff; /* Light text color */
+  border: 1px solid #666; /* Slightly lighter border for visibility */
+  border-radius: 5px;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #bbb; /* Highlight focus with brighter border */
+  outline: none; /* Remove default focus outline */
 }
 
 button {
-  background-color: #007bff;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff; /* Keep primary button color */
   color: #fff;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Darker blue on hover */
 }
+
 </style>

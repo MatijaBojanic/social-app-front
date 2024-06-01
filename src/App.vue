@@ -12,12 +12,13 @@ export default {
 
 
 <style>
-html, body, #app {
+body, html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Prevents scrollbars if not necessary */
+  background-color: #121212; /* Dark background for the entire page */
+  color: #e0e0e0; /* Lighter text color for readability */
 }
 
 #app {
