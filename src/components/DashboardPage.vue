@@ -12,22 +12,48 @@
     </header>
     <main class="dashboard-content">
       <h1>This is the Dashboard</h1>
+      <div v-if="posts.length">
+        <div class="post" v-for="post in posts" :key="post.id">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.body }}</p>
+          <small>Posted on: {{ new Date(post.created_at).toLocaleDateString() }}</small>
+        </div>
+      </div>
+      <div v-else>
+        <p>Oops, no posts available</p>
+      </div>
     </main>
   </div>
 </template>
 
 <script>
-import {logout as logoutCall} from "@/components/axiosService";
+import {logout as logoutCall, posts as postsCall} from "@/components/axiosService";
 
 export default {
   name: 'DashboardPage',
+  data() {
+    return {
+      posts: []
+    };
+  },
+  mounted() {
+    this.fetchPosts();
+  },
   methods: {
+  async fetchPosts() {
+      try {
+        const response = postsCall();
+        this.posts = response.data.data;
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        this.posts = [];
+      }
+    },
     async logout() {
       await logoutCall();
       this.$router.replace('/login');
     }
   }
-
 };
 </script>
 
@@ -95,6 +121,14 @@ body, html {
   flex: 1;
   padding: 2rem;
   color: #e0e0e0; /* Ensuring text inside content is also light colored */
+}
+
+.post {
+  background: #333;
+  color: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }
 </style>
 

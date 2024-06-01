@@ -35,4 +35,9 @@ async function initializeApp() {
     return response.data;
 }
 
-export { login, initializeApp, logout};
+async function posts() {
+    const response = await axiosInstance.get('/posts');
+    return response.data;
+}
+
+export { login, initializeApp, logout, posts};
