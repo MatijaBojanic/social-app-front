@@ -44,12 +44,6 @@ export default {
       } catch (error) {
         console.error('Initialization failed:', error.message);
       }
-
-      window.Echo.channel('public.social-app.' + this.$root.user.uuid +'.comment')
-          .listen('comment.updated', (e) => {
-            console.log('comment', e);
-            this.initializeApp();
-          });
     }
   }
 };
