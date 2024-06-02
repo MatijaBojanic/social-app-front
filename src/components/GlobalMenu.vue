@@ -1,14 +1,19 @@
 <template>
-  <header v-if="shouldShowMenu" class="dashboard-header">
-    <nav class="dashboard-menu">
-      <ul>
-        <li><router-link to="/dashboard">Home</router-link></li>
-        <li><router-link :to="`/user/${$root.user.id}`">Profile</router-link></li>
-      </ul>
-      <button @click="logout" class="logout-button">Logout</button>
-    </nav>
-  </header>
+    <header v-if="shouldShowMenu" class="dashboard-header">
+      <nav class="dashboard-menu">
+        <ul>
+          <li><router-link to="/dashboard">Home</router-link></li>
+          <li><router-link :to="`/user/${$root.user.id}`">Profile</router-link></li>
+        </ul>
+        <div class="search-container">
+          <input type="text" v-model="searchKey" @keyup.enter="searchUsers" placeholder="Search users...">
+          <button @click="searchUsers" class="search-button">Search</button>
+        </div>
+        <button @click="logout" class="logout-button">Logout</button>
+      </nav>
+    </header>
 </template>
+
 
 <script>
 import {logout as logoutCall} from "@/components/axiosService";
@@ -17,6 +22,7 @@ export default {
   data() {
     return {
       shouldShowMenu: true,
+      searchKey: ''
     };
   },
   created() {
@@ -33,8 +39,11 @@ export default {
     async logout() {
       await logoutCall();
       this.$router.replace('/login');
+    },
+    searchUsers() {
+      this.$router.push({ path: '/users/search', query: { q: this.searchKey } });
     }
-  }
+  },
 };
 </script>
 
@@ -89,4 +98,30 @@ body, html {
 .dashboard-menu .logout-button:hover {
   background-color: #b71c1c; /* Darker red on hover */
 }
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-container input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.search-button {
+  padding: 8px 16px;
+  background-color: #007bff; /* Blue button for contrast */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
 </style>

@@ -87,5 +87,25 @@ async function toggleFollow(userId) {
     return response.data;
 }
 
+async function searchUsers(query) {
+    const response = await axiosInstance.get('/users', {
+        params: {
+            value: query,
+        },
+    });
+    return response.data;
+}
 
-export {register, login, initializeApp, logout, posts, post, createPost, createComment, getUserDetails, toggleFollow};
+export {
+    register,
+    login,
+    initializeApp,
+    logout,
+    posts,
+    post,
+    createPost,
+    createComment,
+    getUserDetails,
+    toggleFollow,
+    searchUsers
+};
