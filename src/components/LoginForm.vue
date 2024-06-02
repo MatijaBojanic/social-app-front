@@ -12,6 +12,9 @@
       </div>
       <button type="submit" class="btn-login">Login</button>
     </form>
+    <div class="register-link">
+      <a href="/register">Don't have an account? Register here!</a>
+    </div>
   </div>
 </template>
 
@@ -117,4 +120,17 @@ button:hover {
   background-color: #0056b3; /* Darker blue on hover */
 }
 
+.register-link {
+  margin-top: 20px; /* Add some space above the link */
+  text-align: center; /* Center the link horizontally */
+}
+
+.register-link a {
+  color: #0096ff; /* Bright color for visibility and consistency */
+  text-decoration: none; /* Optional: removes underline */
+}
+
+.register-link a:hover {
+  text-decoration: underline; /* Adds underline on hover for user feedback */
+}
 </style>
