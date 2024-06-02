@@ -29,6 +29,18 @@ async function logout() {
     return response.data;  // return the whole response data object
 }
 
+async function register(email, password, username, firstName, lastName) {
+    await initializeCsrf();  // Ensure CSRF token is set before login
+    const response = await axiosInstance.post('/register', {
+        'email': email,
+        'password': password,
+        'username': username,
+        'first_name': firstName,
+        'last_name': lastName
+    });
+    return response.data;
+}
+
 // Function to initialize app data
 async function initializeApp() {
     const response = await axiosInstance.get('/initialize');
@@ -76,4 +88,4 @@ async function toggleFollow(userId) {
 }
 
 
-export { login, initializeApp, logout, posts, post, createPost, createComment, getUserDetails, toggleFollow};
+export {register, login, initializeApp, logout, posts, post, createPost, createComment, getUserDetails, toggleFollow};
