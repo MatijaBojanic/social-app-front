@@ -8,7 +8,7 @@
           <!-- Make the post title clickable -->
           <h3><router-link :to="{ name: 'PostPage', params: { id: post.id }}">{{ post.title }}</router-link></h3>
           <p>{{ post.body }}</p>
-          <small>Posted by: {{ post.user.username }} on {{ new Date(post.created_at).toLocaleDateString() }}</small>
+          <small>Posted by: <router-link :to="`/user/${post.user.id}`" >{{ post.user.username }}</router-link> on {{ new Date(post.created_at).toLocaleDateString() }}</small>
         </div>
         <!-- Pagination Controls -->
         <div class="pagination">
@@ -102,6 +102,16 @@ body, html {
 }
 
 .post h3 a:hover {
+  color: #cccccc; /* Light grey for hover effect */
+  text-decoration: underline; /* Optional: Adds an underline on hover to highlight the link */
+}
+
+.post a {
+  color: #ffffff; /* White color for better visibility */
+  text-decoration: none; /* Removes underline */
+}
+
+.post a:hover {
   color: #cccccc; /* Light grey for hover effect */
   text-decoration: underline; /* Optional: Adds an underline on hover to highlight the link */
 }
