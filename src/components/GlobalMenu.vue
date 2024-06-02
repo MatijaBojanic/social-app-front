@@ -5,7 +5,7 @@
           <li><router-link to="/dashboard">Home</router-link></li>
           <li><router-link :to="`/user/${$root.user.id}`">Profile</router-link></li>
         </ul>
-        <div class="search-container">
+        <div v-if="shouldShowSearch" class="search-container">
           <input type="text" v-model="searchKey" @keyup.enter="searchUsers" placeholder="Search users...">
           <button @click="searchUsers" class="search-button">Search</button>
         </div>
@@ -24,6 +24,13 @@ export default {
       shouldShowMenu: true,
       searchKey: ''
     };
+  },
+  computed: {
+    // Compute a boolean flag to determine if the search bar should be shown
+    shouldShowSearch() {
+      // Check if the current route is '/users/search'
+      return this.$route.path !== '/users/search';
+    }
   },
   created() {
     this.updateVisibility();
