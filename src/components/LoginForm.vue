@@ -37,6 +37,7 @@ export default {
             .listen('.commentUpdated', (e) => {
               console.log("TEST")
               console.log('Event data:', e);
+              alert('comment received');
             });
         this.$router.push('/dashboard');
       } catch (error) {

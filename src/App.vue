@@ -7,7 +7,7 @@
 
 <script>
 import GlobalMenu from './components/GlobalMenu';
-
+import {initializeApp} from "@/components/axiosService";
 export default {
   components: {
     GlobalMenu
@@ -16,6 +16,14 @@ export default {
     // This will check the current route and decide whether to show the menu
     showMenu() {
       return this.$route.name !== 'login'; // Assuming the route name for the login page is 'login'
+    }
+  },
+  async mounted() {
+    console.log("testtttt");
+    try {
+      this.$root.user = await initializeApp();
+    } catch (error) {
+      console.error('Initialization failed:', error.message);
     }
   }
 }

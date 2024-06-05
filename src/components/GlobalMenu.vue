@@ -3,7 +3,7 @@
       <nav class="dashboard-menu">
         <ul>
           <li><router-link to="/dashboard">Home</router-link></li>
-          <li><router-link :to="`/user/${$root.user.id}`">Profile</router-link></li>
+          <li><router-link :to="`/user/${$root.user?.id}`">Profile</router-link></li>
         </ul>
         <div v-if="shouldShowSearch" class="search-container">
           <input type="text" v-model="searchKey" @keyup.enter="searchUsers" placeholder="Search users...">
@@ -38,6 +38,8 @@ export default {
       this.updateVisibility(to);
       next();
     });
+
+    console.log("init");
   },
   methods: {
     updateVisibility(to = this.$route) {
