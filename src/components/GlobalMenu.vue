@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     updateVisibility(to = this.$route) {
-      this.shouldShowMenu = to.name !== 'Login';
+      this.shouldShowMenu = (to.name !== 'Login' && to.name!== 'RegisterPage');
     },
     async logout() {
       await logoutCall();
