@@ -69,10 +69,11 @@ async function createComment(postId, commentBody) {
     return response.data;
 }
 
-async function createPost(title, body) {
-    const response = await axiosInstance.post('/posts', {
-        'title': title,
-        'body': body
+async function createPost(formData) {
+const response = await axiosInstance.post('/posts', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data' // This might be optional as Axios sets it automatically when using FormData
+        }
     });
     return response.data;
 }
