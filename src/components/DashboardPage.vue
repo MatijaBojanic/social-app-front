@@ -7,6 +7,7 @@
         <div class="post" v-for="post in posts" :key="post.id">
           <!-- Make the post title clickable -->
           <h3><router-link :to="{ name: 'PostPage', params: { id: post.id }}">{{ post.title }}</router-link></h3>
+            <img v-if="post.image_path" :src="getImageUrl(post)" alt="Post Image">
           <p>{{ post.body }}</p>
           <small>Posted by: <router-link :to="`/user/${post.user.id}`" >{{ post.user.username }}</router-link> on {{ new Date(post.created_at).toLocaleDateString() }}</small>
         </div>
@@ -42,6 +43,9 @@ export default {
     this.fetchPosts(this.currentPage);
   },
   methods: {
+    getImageUrl(post) {
+      return post.image_path ? `${process.env.VUE_APP_API_URL}/storage/${post.image_path}` : '/default-image.png';
+    },
     async fetchPosts(page) {
       try {
         const response = await postsCall(page);
@@ -145,6 +149,11 @@ body, html {
 
 .create-post-button:hover {
   background-color: #45a049; /* Slightly darker green for hover effect */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 </style>
 

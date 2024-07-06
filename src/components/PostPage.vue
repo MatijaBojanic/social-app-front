@@ -3,6 +3,7 @@
     <!-- Back Button -->
     <button @click="goBack" class="back-button">← Back</button>
     <h1>{{ post.title }}</h1>
+      <img v-if="post.image_path" :src="imageUrl" alt="Post Image">
     <p>{{ post.body }}</p>
     <div class="post-user" v-if="post.user">
       Posted by: {{ post.user.username }}
@@ -36,6 +37,11 @@ import {post as showPost, createComment} from "@/components/axiosService";
 
 export default {
   name: 'PostPage',
+  computed: {
+    imageUrl() {
+      return `${process.env.VUE_APP_API_URL}/storage/${this.post.image_path}`;
+    }
+  },
   data() {
     return {
       post: null,
@@ -158,5 +164,10 @@ export default {
 
 .back-button:hover {
   background-color: #555;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 </style>
