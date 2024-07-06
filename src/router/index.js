@@ -21,9 +21,9 @@ export default new Router({
         { path: '/login', name: 'Login', component: LoginForm },
         { path: '/register', name: 'RegisterPage', component: RegisterPage},
         { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+        { path: '/post/create', name: 'CreatePost', component: CreatePost},
         { path: '/post/:id', name: 'PostPage', component: PostPage},
-        {path: '/post/create', name: 'CreatePost', component: CreatePost},
-        {path: '/user/:id', name: 'ProfilePage', component: ProfilePage},
+        { path: '/user/:id', name: 'ProfilePage', component: ProfilePage},
         {
             path: '/users/search',
             name: 'UserSearchPage',
