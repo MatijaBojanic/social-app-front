@@ -43,6 +43,13 @@ async function register(email, password, username, firstName, lastName) {
 // Function to initialize app data
 async function initializeApp() {
     const response = await axiosInstance.get('/initialize');
+
+    window.Echo.channel('public.social-app.' + response.data.uuid +'.comment')
+        .listen('.commentUpdated', (e) => {
+            console.log('Event data:', e);
+            alert('comment received');
+        });
+
     return response.data;
 }
 
