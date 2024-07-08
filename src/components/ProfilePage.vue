@@ -66,7 +66,6 @@ export default {
   methods: {
     async fetchUserData() {
       const userId = this.$route.params.id;
-      console.log('we try to fetch data for user:' + userId)
       // Fetch user details and posts
       const userDetails = await getUserDetails(userId);
       this.user = userDetails;

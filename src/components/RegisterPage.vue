@@ -72,7 +72,7 @@ export default {
     },
     async initializeApp() {
       try {
-        this.$root.user = await initializeApp();
+        this.$root.user = await initializeApp(this.$router);
       } catch (error) {
         console.error('Initialization failed:', error.message);
       }

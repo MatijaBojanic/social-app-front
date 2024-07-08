@@ -41,13 +41,12 @@ async function register(email, password, username, firstName, lastName) {
 }
 
 // Function to initialize app data
-async function initializeApp() {
+async function initializeApp(router) {
     const response = await axiosInstance.get('/initialize');
 
     window.Echo.channel('public.social-app.' + response.data.uuid +'.comment')
         .listen('.commentUpdated', (e) => {
-            console.log('Event data:', e);
-            showSnackbar('Comment received!');
+            showSnackbar('Comment received on post:' + e.post_id + "!" , e.post_id, router);
         });
 
     return response.data;
@@ -103,7 +102,7 @@ async function searchUsers(query) {
     return response.data;
 }
 
-function showSnackbar(message) {
+function showSnackbar(message, postId, router) {
     // Get the snackbar DIV
     let snackbar = document.getElementById("snackbar");
 
@@ -117,12 +116,22 @@ function showSnackbar(message) {
     // Set the message
     snackbar.textContent = message;
 
+    // Set onclick to redirect to the post
+    snackbar.onclick = function() {
+        if(router.currentRoute.path !== `/post/${postId}`)
+            router.push({ path: `/post/${postId}` });
+    };
+
     // Add the "show" class to DIV
     snackbar.className = "show";
 
-    // After 3 seconds, remove the show class from DIV
-    setTimeout(function() { snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+    // After 3 seconds, remove the show class from DIV and clear onclick to prevent memory leaks
+    setTimeout(function() {
+        snackbar.className = snackbar.className.replace("show", "");
+        snackbar.onclick = null; // Remove the onclick event handler
+    }, 3000);
 }
+
 
 
 export {

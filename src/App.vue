@@ -20,7 +20,7 @@ export default {
   },
   async mounted() {
     try {
-      this.$root.user = await initializeApp();
+      this.$root.user = await initializeApp(this.$router);
     } catch (error) {
       if( this.$route.name !== 'Login'
           && this.$route.name !== 'login'
