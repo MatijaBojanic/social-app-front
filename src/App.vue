@@ -19,11 +19,16 @@ export default {
     }
   },
   async mounted() {
-    console.log("testtttt");
     try {
       this.$root.user = await initializeApp();
     } catch (error) {
-      console.error('Initialization failed:', error.message);
+      if( this.$route.name !== 'Login'
+          && this.$route.name !== 'login'
+          && this.$route.name !== 'RegisterPage'
+          && this.$route.name !== 'register'
+      ) {
+        this.$router.push('/login');
+      }
     }
   }
 }
