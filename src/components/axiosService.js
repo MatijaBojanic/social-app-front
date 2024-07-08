@@ -47,7 +47,7 @@ async function initializeApp() {
     window.Echo.channel('public.social-app.' + response.data.uuid +'.comment')
         .listen('.commentUpdated', (e) => {
             console.log('Event data:', e);
-            alert('comment received');
+            showSnackbar('Comment received!');
         });
 
     return response.data;
@@ -102,6 +102,28 @@ async function searchUsers(query) {
     });
     return response.data;
 }
+
+function showSnackbar(message) {
+    // Get the snackbar DIV
+    let snackbar = document.getElementById("snackbar");
+
+    // If it doesn't exist, create it
+    if (!snackbar) {
+        snackbar = document.createElement("div");
+        snackbar.id = "snackbar";
+        document.body.appendChild(snackbar);
+    }
+
+    // Set the message
+    snackbar.textContent = message;
+
+    // Add the "show" class to DIV
+    snackbar.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function() { snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+}
+
 
 export {
     register,
