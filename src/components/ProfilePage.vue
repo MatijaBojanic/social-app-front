@@ -51,6 +51,18 @@ export default {
   created() {
     this.fetchUserData();
   },
+  watch: {
+    // Watch for changes in route params
+    '$route.params.id': {
+      immediate: true,
+      handler(newId, oldId) {
+        // Call fetchUserData if the ID changes
+        if (newId !== oldId) {
+          this.fetchUserData();
+        }
+      }
+    }
+  },
   methods: {
     async fetchUserData() {
       const userId = this.$route.params.id;
