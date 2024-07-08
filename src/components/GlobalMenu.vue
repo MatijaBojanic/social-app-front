@@ -39,7 +39,6 @@ export default {
       next();
     });
 
-    console.log("init");
   },
   methods: {
     updateVisibility(to = this.$route) {

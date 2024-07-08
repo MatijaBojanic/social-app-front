@@ -54,13 +54,8 @@ export default {
   methods: {
     async fetchUserData() {
       const userId = this.$route.params.id;
-
-      console.log("USER ID:" + userId);
-
       // Fetch user details and posts
       const userDetails = await getUserDetails(userId);
-      console.log(userDetails);
-
       this.user = userDetails;
       this.isFollowing = userDetails.isFollowing;
 
@@ -68,11 +63,7 @@ export default {
     },
     async fetchPosts(page) {
       const userId = this.$route.params.id;
-
-      console.log("USER ID::::::" + userId);
-
       const response = await posts(page, userId);
-      console.log(response);
       this.posts = response.data;
       this.currentPage = response.current_page;
       this.lastPage = response.last_page;

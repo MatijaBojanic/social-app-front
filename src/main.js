@@ -7,8 +7,6 @@ import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 window.Pusher = Pusher;
 
-console.log(process.env.VUE_APP_PUSHER_APP_KEY);
-
 window.Echo = new Echo({
   broadcaster: 'pusher',
   key: process.env.VUE_APP_PUSHER_APP_KEY,

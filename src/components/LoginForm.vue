@@ -35,7 +35,6 @@ export default {
         await this.initializeApp();
         window.Echo.channel('public.social-app.' + this.$root.user.uuid +'.comment')
             .listen('.commentUpdated', (e) => {
-              console.log("TEST")
               console.log('Event data:', e);
               alert('comment received');
             });
