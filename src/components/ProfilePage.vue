@@ -3,7 +3,7 @@
     <header class="profile-box">
       <div class="profile-header">
         <h1>{{ user?.username }}</h1>
-        <button v-if=" $root.user !== null &&  ($root.user.id !== this.user.id)" @click="toggleFollow" class="follow-button">
+        <button v-if=" $root.user !== null &&  ($root.user?.id !== this.user?.id)" @click="toggleFollow" class="follow-button">
           {{ isFollowing ? 'Unfollow' : 'Follow' }}
         </button>
       </div>
@@ -54,6 +54,7 @@ export default {
   methods: {
     async fetchUserData() {
       const userId = this.$route.params.id;
+      console.log('we try to fetch data for user:' + userId)
       // Fetch user details and posts
       const userDetails = await getUserDetails(userId);
       this.user = userDetails;
